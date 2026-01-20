@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS 橫向捲動練習</title>
+    <style>
+      .card-container {
+        display: flex;
+        /* 3. 當內容超出寬度時，開啟水平方向的捲動功能 */
+        overflow-x: auto;
+        /* 4. (進階提示) 為了防止卡片被強制縮小，請在下方 .card 補上不壓縮的屬性 */
+        background-color: #f0f0f0;
+        padding: 20px;
+        /* 1. 設定捲動貼齊的類型：水平方向(x)，且強制(mandatory)貼齊 */
+        scroll-snap-type: x mandatory;
+      }
+
+      .card-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card-track {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+
+        /* 1. 指定動畫名稱 */
+        animation-name: auto-scroll;
+        /* 2. 設定動畫時間（例如 10秒） */
+        animation-duration: 10s;
+        /* 3. 設定動畫次數：無限次 */
+        animation-iteration-count: infinite;
+        /* 4. 設定動畫速度：等速 */
+        animation-timing-function: linear;
+      }
+
+      /* 額外加分題：滑鼠移上去時，動畫會怎樣？ */
+      .card-container:hover .card-track {
+        animation-play-state: paused;
+      }
+
+      .card {
+        height: 150px;
+        width: 100%;
+        background-color: #3498db;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        border-radius: 10px;
+        /* 提示：flex-shrink 如果設為 0，代表不論空間多小，我都不縮小 */
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+
+      /* 定義動畫：從 0 移動到最後一張 */
+      @keyframes auto-scroll {
+        /* 0%~20% 停在第一張 */
+        0%,
+        20% {
+          transform: translateX(0);
+        }
+
+        /* 25%~45% 停在第二張 (移動 -270px) */
+        25%,
+        45% {
+          transform: translateX(calc(-100% - 20px));
+        }
+
+        /* 50%~70% 停在第三張 (再移動 -270px) */
+        50%,
+        70% {
+          transform: translateX(calc(-200% - 40px));
+        }
+
+        /* 75%~95% 停在第四張 (再移動 -270px) */
+        75%,
+        95% {
+          transform: translateX(calc(-300% - 60px));
+        }
+
+        /* 100% 回到起點 (如果你要做循環的話) */
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card-track">
+        <div class="card">卡片 1</div>
+        <div class="card">卡片 2</div>
+        <div class="card">卡片 3</div>
+        <div class="card">卡片 4</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Footer 展開練習</title>
+    <style>
+      /* 1. 預設隱藏所有清單 */
+      .footer-item {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+      }
+
+      /* 2. 當開關被勾選時，同步影響後面的「所有」清單 */
+      /* 提示：我們要穿過 .footer-container 找到裡面的 .menu-list */
+      .menu-btn:checked ~ .footer-container .footer-item {
+        max-height: 500px;
+      }
+
+      /* 電腦版：直接並排顯示，不縮放 */
+      @media (min-width: 768px) {
+        .footer-container {
+          display: flex;
+          gap: 50px;
+        }
+        .menu-list {
+          max-height: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <footer class="footer">
+      <input type="checkbox" id="menu-control" class="menu-btn" />
+
+      <label for="menu-control" class="menu-title"> 幫助中心 (點我展開) </label>
+
+      <ul class="menu-list">
+        <li>常見問題</li>
+        <li>聯絡我們</li>
+        <li>服務條款</li>
+      </ul>
+    </footer> -->
+
+    <footer class="main-footer">
+      <input type="checkbox" id="footer-toggle" class="menu-btn" />
+
+      <label for="footer-toggle" class="menu-title">展開/隱藏所有分類</label>
+
+      <div class="footer-container">
+        <section class="footer-item">
+          <h3>Pages</h3>
+          <ul class="menu-list">
+            <li>About Us</li>
+            <li>Our Projects</li>
+          </ul>
+        </section>
+
+        <section class="footer-item">
+          <h3>Services</h3>
+          <ul class="menu-list">
+            <li>Kitchen</li>
+            <li>Living Area</li>
+          </ul>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
